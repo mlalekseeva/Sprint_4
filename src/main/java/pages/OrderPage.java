@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 
 import org.openqa.selenium.By;
@@ -32,9 +32,6 @@ public class OrderPage {
     private By colorCheckbox = By.id("black");
     // Кнопка "Заказать" самокат
     private By orderItemButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
-
-    // Баннер окна подтверждения заказа
-    //private By confirmationHeader = By.className("Order_ModalHeader__3FDaJ");
 
     //Кнопка подтверждения заказа
     private By confirmationButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']");
@@ -70,11 +67,6 @@ public class OrderPage {
         driver.findElement(nextButton).click();
     }
 
-   /* public void checkCalendarForm() {
-        driver.findElement(orderDateField).click();
-        driver.findElement(calendarOrder).isDisplayed();
-    } */
-
     public void setOrderDate(String date) {
         driver.findElement(orderDateField).sendKeys(date);
     }
@@ -83,10 +75,6 @@ public class OrderPage {
         driver.findElement(orderLengthList).click();
         driver.findElement(orderLengthOption).click();
     }
-
-    /* public void clickOrderLengthOption() {
-        driver.findElement(orderLengthOption).click();
-    } */
 
     public void setColorCheckbox() {
         driver.findElement(colorCheckbox).click();
@@ -100,11 +88,11 @@ public class OrderPage {
         driver.findElement(confirmationButton).click();
     }
 
-    public void checkOrderConfirmation(boolean result) {
-        assertEquals(result, driver.findElement(orderInformationHeader).isDisplayed());
+    public void checkOrderConfirmation() {
+        assertEquals("Ошибка при оформлении заказа", driver.findElement(orderInformationHeader).getText(), "Заказ оформлен");
     }
 
-    public void makeOrder(String name, String surname, String address, String metroStation, String phone, String date, boolean result) {
+     public void makeOrder(String name, String surname, String address, String metroStation, String phone, String date) {
 
         setClientName(name);
         setClientSurname(surname);
@@ -117,7 +105,6 @@ public class OrderPage {
         setColorCheckbox();
         clickOrderItemButton();
         clickConfirmationButton();
-        checkOrderConfirmation(result);
 
     }
 
